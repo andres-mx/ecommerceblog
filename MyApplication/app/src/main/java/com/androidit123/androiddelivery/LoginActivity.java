@@ -38,6 +38,8 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +47,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import models.Profile;
+import utils.GlobalMethods;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -77,6 +82,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mLoginFormView;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+    private Profile profile;
+    private Gson gson;
+    private String profileString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +111,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                                 try
                                 {
-                                    String name = object.get("name").toString();
-                                    String email = object.get("email").toString();
+                                    profile = new Profile();
+                                    profile.setUser_name(object.get("name").toString());
+                                    profile.setEmail(object.get("email").toString());
+                                    profile.setKey(object.get("id").toString());
+                                    profile.setUrl_image("https://graph.facebook.com/"+object.get("id").toString()+"/picture?type=large");
+                                    gson = new GsonBuilder().create();
+                                    profileString = gson.toJson(profile);
+                                    GlobalMethods.saveStorage(LoginActivity.this,profileString,"profile");
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 }
