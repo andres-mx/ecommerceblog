@@ -15,6 +15,14 @@
     </string>
     <string name="title_activity_main">MainActivity</string>
 
+    <string name="title_address">Direcciones</string>
+    <string name="action_add_address">Agregar Dirección</string>
+    <string name="text_retirement">Retiro</string>
+    <string name="text_delivery">Entrega</string>
+    <string name="action_continue">Continuar</string>
+    <string name="text_date_hint">dd/mm</string>
+    <string name="text_hour_hint">hh:mm</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
